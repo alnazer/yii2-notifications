@@ -72,9 +72,19 @@ trait NotifiableTrait
         return $this->hasMany(Notification::className(), ['notifiable_id' => 'id'])
             ->andOnCondition(['notifiable_type' => get_class($this)]);
     }
-
+    public function getCountnotifications()
+    {
+        /** @var $this BaseActiveRecord */
+        return $this->hasMany(Notification::className(), ['notifiable_id' => 'id'])
+            ->andOnCondition(['notifiable_type' => get_class($this)])->count();
+    }
     public function getUnreadNotifications()
     {
         return $this->getNotifications()->andOnCondition(['read_at' => null]);
+    }
+    
+     public function getCountUnreadNotifications()
+    {
+        return $this->getNotifications()->andOnCondition(['read_at' => null])->count();
     }
 }
