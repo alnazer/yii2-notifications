@@ -77,4 +77,9 @@ trait NotifiableTrait
     {
         return $this->getNotifications()->andOnCondition(['read_at' => null]);
     }
+    
+     public function getCountUnreadNotifications()
+    {
+        return $this->getNotifications()->andOnCondition(['read_at' => null])->count();
+    }
 }
